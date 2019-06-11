@@ -47,6 +47,7 @@ namespace ClientSideBlazorWithPrerendering.Server
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
+                endpoints.MapFallbackToPage("/_Host");
             });
 
             app.UseBlazor<Client.Startup>();
