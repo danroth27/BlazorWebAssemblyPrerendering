@@ -14,7 +14,7 @@ namespace ClientSideBlazorWithPrerendering.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().AddNewtonsoftJson();
+            services.AddMvc();
             services.AddResponseCompression(opts =>
             {
                 opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
@@ -32,13 +32,8 @@ namespace ClientSideBlazorWithPrerendering.Server
                 app.UseDeveloperExceptionPage();
                 app.UseBlazorDebugging();
             }
-            else
-            {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
 
-            app.UseHttpsRedirection();
+            app.UseClientSideBlazorFiles<Client.Startup>();
 
             app.UseStaticFiles();
 
@@ -49,8 +44,6 @@ namespace ClientSideBlazorWithPrerendering.Server
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapFallbackToPage("/_Host");
             });
-
-            app.UseBlazor<Client.Startup>();
         }
     }
 }
