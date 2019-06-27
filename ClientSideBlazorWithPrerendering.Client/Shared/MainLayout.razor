@@ -1,5 +1,6 @@
 ﻿@inherits LayoutComponentBase
-
+@inject IJSRuntime jsRuntime
+@inject IComponentContext context
 <div class="sidebar">
     <NavMenu />
 </div>
@@ -13,3 +14,14 @@
         @Body
     </div>
 </div>
+
+@code {
+
+    protected override async Task OnAfterRenderAsync()
+    {
+        if (context.IsConnected)
+        {
+            await jsRuntime.InvokeAsync<object>("loadingOverlay.hide");
+        }
+    }
+}
