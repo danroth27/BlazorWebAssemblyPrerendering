@@ -1,6 +1,5 @@
 ﻿@page "/fetchdata"
-@using ClientSideBlazorWithPrerendering.Shared
-@inject HttpClient Http
+@inject IWeatherForecastService WeatherService
 
 <h1>Weather forecast</h1>
 
@@ -36,10 +35,10 @@ else
 }
 
 @code {
-    WeatherForecast[] forecasts;
+    IEnumerable<WeatherForecast> forecasts;
 
-    protected override async Task OnInitAsync()
+    protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetJsonAsync<WeatherForecast[]>("api/SampleData/WeatherForecasts");
+        forecasts = await WeatherService.GetForecastAsync(DateTime.Now);
     }
 }

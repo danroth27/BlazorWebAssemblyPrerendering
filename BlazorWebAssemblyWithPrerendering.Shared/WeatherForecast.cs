@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ClientSideBlazorWithPrerendering.Shared
+namespace BlazorWebAssemblyWithPrerendering.Shared
 {
     public class WeatherForecast
     {
