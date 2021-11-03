@@ -10,8 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlazorWebAssemblyWithPrerendering.Client\BlazorWebAssemblyWithPrerendering.Client.csproj" />
-    <ProjectReference Include="..\BlazorWebAssemblyWithPrerendering.Shared\BlazorWebAssemblyWithPrerendering.Shared.csproj" />
+    <ProjectReference Include="..\Client\BlazorWebAssemblyWithPrerendering.Client.csproj" />
+    <ProjectReference Include="..\Shared\BlazorWebAssemblyWithPrerendering.Shared.csproj" />
   </ItemGroup>
 
 </Project>

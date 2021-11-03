@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlazorWebAssemblyWithPrerendering.Shared\BlazorWebAssemblyWithPrerendering.Shared.csproj" />
+    <ProjectReference Include="..\Shared\BlazorWebAssemblyWithPrerendering.Shared.csproj" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
