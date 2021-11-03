@@ -1,22 +1,39 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using BlazorWebAssemblyPrerendering.Server;
+using BlazorWebAssemblyPrerendering.Shared;
+using Microsoft.AspNetCore.ResponseCompression;
 
-namespace BlazorWebAssemblyWithPrerendering.Server
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+
+builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+builder.Services.AddSingleton<IWeatherForecastService, WeatherForecastService>();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            BuildWebHost(args).Run();
-        }
-
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseConfiguration(new ConfigurationBuilder()
-                    .AddCommandLine(args)
-                    .Build())
-                .UseStartup<Startup>()
-                .Build();
-    }
+    app.UseWebAssemblyDebugging();
 }
+else
+{
+    app.UseExceptionHandler("/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+
+app.UseBlazorFrameworkFiles();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+
+app.MapRazorPages();
+app.MapControllers();
+app.MapFallbackToPage("/_Host");
+
+app.Run();

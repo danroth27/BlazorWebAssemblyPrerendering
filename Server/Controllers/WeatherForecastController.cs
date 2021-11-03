@@ -1,27 +1,24 @@
-﻿using BlazorWebAssemblyWithPrerendering.Shared;
+using BlazorWebAssemblyPrerendering.Shared;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace BlazorWebAssemblyWithPrerendering.Server.Controllers
+namespace BlazorWebAssemblyPrerendering.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : Controller
+    public class WeatherForecastController : ControllerBase
     {
-        public WeatherForecastController(IWeatherForecastService weatherService)
+        private readonly IWeatherForecastService forecastService;
+
+        public WeatherForecastController(IWeatherForecastService forecastService)
         {
-            _weatherService = weatherService;
+            this.forecastService = forecastService;
         }
 
-        private readonly IWeatherForecastService _weatherService;
-
         [HttpGet]
-        public Task<IEnumerable<WeatherForecast>> Get()
+        public async Task<IEnumerable<WeatherForecast>> Get()
         {
-            return _weatherService.GetForecastAsync(DateTime.Now);
+            var forecasts = await forecastService.GetForecastAsync(DateTime.Now);
+            return forecasts;
         }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace BlazorWebAssemblyWithPrerendering.Shared
+namespace BlazorWebAssemblyPrerendering.Shared;
+
+public interface IWeatherForecastService
 {
-    public interface IWeatherForecastService
-    {
-        Task<IEnumerable<WeatherForecast>> GetForecastAsync(DateTime startDate);
-    }
+    Task<WeatherForecast[]> GetForecastAsync(DateTime startDate);
 }
